@@ -1,4 +1,5 @@
 import "./Header.css";
+import Navigation from "../Navigation/Navigation";
 
 function Header() {
   return (
@@ -7,6 +8,7 @@ function Header() {
         <a href="/" className="header__logo">
           NewsExplorer
         </a>
+        <Navigation />
       </div>
     </header>
   );
