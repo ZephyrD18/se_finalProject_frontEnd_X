@@ -1,7 +1,23 @@
 @import url("./vendor/normalize.css");
 @import url("./vendor/fonts.css");
 
+:root {
+  --color-primary: #1a1b22;
+  --color-white: #ffffff;
+  --color-gray-text: #b6bcbf;
+  --color-gray-secondary: #6c707a;
+  --color-gray-divider: #d1d2d6;
+  --color-background: #f5f6f7;
+  --color-accent: #2f71e5;
+  --color-error: #ff0000;
+
+  --font-roboto: "Roboto", Arial, sans-serif;
+  --font-roboto-slab: "Roboto Slab", Georgia, serif;
+  --font-inter: "Inter", Arial, sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: "Roboto", Arial, sans-serif;
+  font-family: var(--font-roboto);
+  color: var(--color-primary);
 }
