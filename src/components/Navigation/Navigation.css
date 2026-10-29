@@ -30,6 +30,10 @@
 }
 
 .navigation__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
   min-width: 176px;
   height: 48px;
   padding: 0 19px;
@@ -42,4 +46,14 @@
   line-height: 24px;
   color: var(--color-primary);
   cursor: pointer;
+}
+
+.navigation__button_type_logout {
+  min-width: 112px;
+  padding: 0 15px 0 19px;
+}
+
+.navigation__logout-icon {
+  width: 24px;
+  height: 24px;
 }

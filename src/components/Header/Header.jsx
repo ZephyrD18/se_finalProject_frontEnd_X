@@ -8,7 +8,7 @@ function Header() {
         <a href="/" className="header__logo">
           NewsExplorer
         </a>
-        <Navigation />
+        <Navigation isLoggedIn={true} />
       </div>
     </header>
   );
