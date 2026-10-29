@@ -1,14 +1,14 @@
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function Header({ theme }) {
   return (
-    <header className="header">
+    <header className={`header header_theme_${theme}`}>
       <div className="header__bar">
         <a href="/" className="header__logo">
           NewsExplorer
         </a>
-        <Navigation isLoggedIn={true} />
+        <Navigation theme={theme} isLoggedIn={true} />
       </div>
     </header>
   );

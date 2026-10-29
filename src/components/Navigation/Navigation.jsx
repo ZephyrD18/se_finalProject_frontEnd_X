@@ -1,9 +1,10 @@
 import "./Navigation.css";
-import logoutIcon from "../../images/logout-dark.svg";
+import logoutWhiteIcon from "../../images/logout-white.svg";
+import logoutDarkIcon from "../../images/logout-dark.svg";
 
-function Navigation({ isLoggedIn }) {
+function Navigation({ theme, isLoggedIn }) {
   return (
-    <nav className="navigation">
+    <nav className={`navigation navigation_theme_${theme}`}>
       <ul className="navigation__list">
         <li className="navigation__item">
           <a href="/" className="navigation__link">
@@ -26,7 +27,7 @@ function Navigation({ isLoggedIn }) {
               Elise
               <img
                 className="navigation__logout-icon"
-                src={logoutIcon}
+                src={theme === "dark" ? logoutWhiteIcon : logoutDarkIcon}
                 alt="Log out"
               />
             </button>
