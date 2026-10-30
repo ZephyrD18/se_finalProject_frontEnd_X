@@ -73,3 +73,47 @@
   width: 24px;
   height: 24px;
 }
+
+@media screen and (max-width: 767px) {
+  .navigation {
+    display: none;
+  }
+
+  .navigation_opened {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    display: block;
+    width: 100%;
+    padding: 16px 16px 24px;
+    border-radius: 0 0 16px 16px;
+    background-color: var(--color-primary);
+  }
+
+  .navigation__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .navigation__item {
+    align-self: auto;
+  }
+
+  .navigation__link {
+    width: 100%;
+    font-size: 18px;
+    line-height: 56px;
+  }
+
+  .navigation_theme_dark .navigation__link {
+    color: var(--color-white);
+  }
+
+  .navigation__button,
+  .navigation__button_type_logout {
+    width: 100%;
+    height: 56px;
+    margin-top: 22px;
+  }
+}

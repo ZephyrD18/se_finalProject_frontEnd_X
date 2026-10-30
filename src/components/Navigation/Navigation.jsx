@@ -2,9 +2,11 @@ import "./Navigation.css";
 import logoutWhiteIcon from "../../images/logout-white.svg";
 import logoutDarkIcon from "../../images/logout-dark.svg";
 
-function Navigation({ theme, isLoggedIn }) {
+function Navigation({ theme, isLoggedIn, isMenuOpen }) {
   return (
-    <nav className={`navigation navigation_theme_${theme}`}>
+    <nav
+      className={`navigation navigation_theme_${theme} ${isMenuOpen ? "navigation_opened" : ""}`}
+    >
       <ul className="navigation__list">
         <li className="navigation__item">
           <a href="/" className="navigation__link">
