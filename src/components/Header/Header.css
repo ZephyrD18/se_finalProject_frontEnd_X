@@ -59,6 +59,12 @@
   background-image: url("../../images/close-small.svg");
 }
 
+.header__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 @media screen and (max-width: 767px) {
   .header__bar {
     position: relative;

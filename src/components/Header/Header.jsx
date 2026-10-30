@@ -25,6 +25,9 @@ function Header({ theme }) {
           isMenuOpen={isMenuOpen}
         />
       </div>
+      {isMenuOpen && (
+        <div className="header__overlay" onClick={() => setIsMenuOpen(false)} />
+      )}
     </header>
   );
 }
