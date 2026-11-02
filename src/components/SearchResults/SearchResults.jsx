@@ -5,7 +5,7 @@ function SearchResults({ articles }) {
   return (
     <section className="search-results">
       <h2 className="search-results__title">Search results</h2>
-      <NewsCardList articles={articles} />
+      <NewsCardList articles={articles} cardType="search" />
       <button className="search-results__more-button" type="button">
         Show more
       </button>

@@ -1,7 +1,9 @@
 import "./NewsCard.css";
 import { formatDate } from "../../utils/formatters";
 
-function NewsCard({ article }) {
+function NewsCard({ article, type }) {
+  const isSavedPage = type === "saved";
+
   return (
     <article className="news-card">
       <a
@@ -24,6 +26,18 @@ function NewsCard({ article }) {
           <p className="news-card__source">{article.source}</p>
         </div>
       </a>
+      <button
+        className={`news-card__button ${
+          isSavedPage
+            ? "news-card__button_type_delete"
+            : "news-card__button_type_bookmark"
+        }`}
+        type="button"
+        aria-label={isSavedPage ? "Remove from saved" : "Save article"}
+      />
+      <span className="news-card__tooltip">
+        {isSavedPage ? "Remove from saved" : "Sign in to save articles"}
+      </span>
     </article>
   );
 }
