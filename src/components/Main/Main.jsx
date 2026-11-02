@@ -1,7 +1,7 @@
 import "./Main.css";
 import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
-import NewsCardList from "../NewsCardList/NewsCardList";
+import SearchResults from "../SearchResults/SearchResults";
 import { sampleArticles } from "../../utils/constants";
 
 function Main() {
@@ -17,7 +17,7 @@ function Main() {
           <SearchForm />
         </div>
       </section>
-      <NewsCardList articles={sampleArticles} />
+      <SearchResults articles={sampleArticles} />
       <About />
     </main>
   );
