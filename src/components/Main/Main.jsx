@@ -1,6 +1,8 @@
 import "./Main.css";
 import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
+import NewsCardList from "../NewsCardList/NewsCardList";
+import { sampleArticles } from "../../utils/constants";
 
 function Main() {
   return (
@@ -15,6 +17,7 @@ function Main() {
           <SearchForm />
         </div>
       </section>
+      <NewsCardList articles={sampleArticles} />
       <About />
     </main>
   );
