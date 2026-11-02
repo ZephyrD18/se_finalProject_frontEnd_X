@@ -4,6 +4,12 @@
   width: 100%;
 }
 
+.header_theme_dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .header__bar {
   display: flex;
   align-items: center;

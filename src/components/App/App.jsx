@@ -1,14 +1,12 @@
 import Header from "../Header/Header";
-import SearchForm from "../SearchForm/SearchForm";
-import About from "../About/About";
+import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 
 function App() {
   return (
     <div className="page">
       <Header theme="dark" />
-      <SearchForm />
-      <About />
+      <Main />
       <Footer />
     </div>
   );
