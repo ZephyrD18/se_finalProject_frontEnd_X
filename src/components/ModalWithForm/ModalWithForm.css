@@ -1,0 +1,141 @@
+.modal-form__title {
+  margin: 0 0 26px;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 28px;
+}
+
+.modal-form {
+  margin: 0;
+}
+
+.modal-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.modal-form__field {
+  position: relative;
+  display: block;
+}
+
+.modal-form__label {
+  display: block;
+  font-family: var(--font-inter);
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--color-accent);
+}
+
+.modal-form__input {
+  display: block;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 0 0 7px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background-color: transparent;
+  font-family: var(--font-inter);
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  caret-color: var(--color-accent);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.modal-form__input::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.modal-form__input:focus {
+  border-bottom-color: #000000;
+}
+
+.modal-form__error {
+  position: absolute;
+  top: calc(100% + 3px);
+  left: 0;
+  font-family: var(--font-inter);
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--color-error);
+}
+
+.modal-form__actions {
+  position: relative;
+  margin-top: 38px;
+}
+
+.modal-form__submit {
+  display: block;
+  width: 100%;
+  height: 64px;
+  border: none;
+  border-radius: 100px;
+  background-color: var(--color-accent);
+  box-shadow: 0 5px 15px rgba(14, 26, 57, 0.2);
+  font-family: var(--font-roboto);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-form__submit:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.modal-form__submit:active {
+  background-color: var(--color-accent-active);
+}
+
+.modal-form__submit:disabled {
+  background-color: var(--color-gray-disabled);
+  box-shadow: none;
+  color: var(--color-gray-text);
+  cursor: default;
+}
+
+.modal-form__switch {
+  margin: 16px 0 0;
+  font-family: var(--font-inter);
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.modal-form__switch-button {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: var(--color-accent);
+  cursor: pointer;
+}
+
+.modal-form__switch-button:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 767px) {
+  .modal-form__title {
+    margin-bottom: 18px;
+  }
+
+  .modal-form__fields {
+    gap: 28px;
+  }
+
+  .modal-form__actions {
+    margin-top: 22px;
+  }
+}
