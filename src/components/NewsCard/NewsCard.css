@@ -136,9 +136,33 @@
   background-image: url("../../images/trash-hover.svg");
 }
 
+.news-card__keyword {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  max-width: calc(100% - 112px);
+  margin: 0;
+  padding: 8px 20px;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: var(--color-white);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media screen and (max-width: 1279px) {
   .news-card__tooltip {
     display: none;
+  }
+
+  .news-card__keyword {
+    top: 8px;
+    left: 8px;
+    max-width: calc(100% - 64px);
+    padding: 8px 12px;
   }
 
   .news-card {
@@ -195,5 +219,10 @@
   .news-card__button {
     top: 16px;
     right: 16px;
+  }
+
+  .news-card__keyword {
+    top: 16px;
+    left: 16px;
   }
 }

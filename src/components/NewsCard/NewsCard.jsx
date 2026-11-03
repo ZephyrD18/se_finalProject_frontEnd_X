@@ -26,6 +26,8 @@ function NewsCard({ article, type }) {
           <p className="news-card__source">{article.source}</p>
         </div>
       </a>
+      {isSavedPage && <p className="news-card__keyword">{article.keyword}</p>}
+
       <button
         className={`news-card__button ${
           isSavedPage
