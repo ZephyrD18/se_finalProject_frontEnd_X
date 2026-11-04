@@ -26,6 +26,9 @@
   font-weight: 500;
   line-height: 24px;
   text-decoration: none;
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .navigation__button {
@@ -44,6 +47,9 @@
   font-weight: 500;
   line-height: 24px;
   cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .navigation__button_type_logout {
@@ -67,6 +73,22 @@
 .navigation_theme_dark .navigation__button {
   border-color: var(--color-white);
   color: var(--color-white);
+}
+
+.navigation_theme_light .navigation__link:hover {
+  opacity: 0.7;
+}
+
+.navigation_theme_light .navigation__button:hover {
+  border-color: var(--color-primary);
+}
+
+.navigation_theme_dark .navigation__link:hover {
+  color: var(--color-white);
+}
+
+.navigation_theme_dark .navigation__button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .navigation__logout-icon {

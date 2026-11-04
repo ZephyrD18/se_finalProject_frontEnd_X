@@ -24,6 +24,7 @@
   font-weight: 700;
   line-height: 24px;
   text-decoration: none;
+  transition: opacity 0.3s ease;
 }
 
 .header_theme_light .header__bar {
@@ -41,6 +42,10 @@
 
 .header_theme_dark .header__logo {
   color: var(--color-white);
+}
+
+.header__logo:hover {
+  opacity: 0.8;
 }
 
 .header__menu-button {

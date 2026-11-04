@@ -22,7 +22,7 @@
   color: var(--color-gray-text);
 }
 
-.search-form__input::focus {
+.search-form__input:focus {
   box-shadow: 0 0 0 2px var(--color-accent-hover);
 }
 
@@ -45,11 +45,11 @@
   transition: background-color 0.3s ease;
 }
 
-.search-form__button::hover {
+.search-form__button:hover {
   background-color: var(--color-accent-hover);
 }
 
-.search-form__button::active {
+.search-form__button:active {
   background-color: var(--color-accent-active);
 }
 
