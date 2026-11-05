@@ -3,7 +3,7 @@ import "./Navigation.css";
 import logoutWhiteIcon from "../../images/logout-white.svg";
 import logoutDarkIcon from "../../images/logout-dark.svg";
 
-function Navigation({ theme, isLoggedIn, isMenuOpen }) {
+function Navigation({ theme, isLoggedIn, isMenuOpen, onLinkClick }) {
   return (
     <nav
       className={`navigation navigation_theme_${theme} ${isMenuOpen ? "navigation_opened" : ""}`}
@@ -13,6 +13,7 @@ function Navigation({ theme, isLoggedIn, isMenuOpen }) {
           <NavLink
             to="/"
             end
+            onClick={onLinkClick}
             className={({ isActive }) =>
               `navigation__link navigation__link_type_home ${isActive ? "navigation__link_active" : ""}`
             }
@@ -24,6 +25,7 @@ function Navigation({ theme, isLoggedIn, isMenuOpen }) {
           <li className="navigation__item">
             <NavLink
               to="/saved-news"
+              onClick={onLinkClick}
               className={({ isActive }) =>
                 `navigation__link navigation__link_type_saved ${isActive ? "navigation__link_active" : ""}`
               }

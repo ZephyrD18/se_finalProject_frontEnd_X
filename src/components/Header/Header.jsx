@@ -3,15 +3,16 @@ import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 import { useState } from "react";
 
-function Header({ theme }) {
+function Header({ theme, isLoggedIn }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <header
       className={`header header_theme_${theme} ${isMenuOpen ? "header_menu-open" : ""}`}
     >
       <div className="header__bar">
-        <Link to="/" className="header__logo">
+        <Link to="/" className="header__logo" onClick={closeMenu}>
           NewsExplorer
         </Link>
         <button
@@ -22,8 +23,9 @@ function Header({ theme }) {
         />
         <Navigation
           theme={isMenuOpen ? "dark" : theme}
-          isLoggedIn={true}
+          isLoggedIn={isLoggedIn}
           isMenuOpen={isMenuOpen}
+          onLinkClick={closeMenu}
         />
       </div>
       {isMenuOpen && (
