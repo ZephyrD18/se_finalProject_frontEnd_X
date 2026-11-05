@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Footer.css";
 import githubIcon from "../../images/github.svg";
 import linkedinIcon from "../../images/linkedin.svg";
@@ -13,16 +14,16 @@ function Footer() {
       <nav className="footer__nav">
         <ul className="footer__list">
           <li className="footer__item">
-            <a className="footer__link" href="/">
+            <Link to="/" className="footer__link">
               Home
-            </a>
+            </Link>
           </li>
           <li className="footer__item">
             <a
               className="footer__link"
               href="https://tripleten.com/"
               target="_blank"
-              rel="nooper noreferrer"
+              rel="noopener noreferrer"
             >
               TripleTen
             </a>

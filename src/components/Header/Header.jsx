@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 import { useState } from "react";
@@ -10,9 +11,9 @@ function Header({ theme }) {
       className={`header header_theme_${theme} ${isMenuOpen ? "header_menu-open" : ""}`}
     >
       <div className="header__bar">
-        <a href="/" className="header__logo">
+        <Link to="/" className="header__logo">
           NewsExplorer
-        </a>
+        </Link>
         <button
           className={`header__menu-button ${isMenuOpen ? "header__menu-button_opened" : ""}`}
           type="button"

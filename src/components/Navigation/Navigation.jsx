@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import logoutWhiteIcon from "../../images/logout-white.svg";
 import logoutDarkIcon from "../../images/logout-dark.svg";
@@ -9,15 +10,26 @@ function Navigation({ theme, isLoggedIn, isMenuOpen }) {
     >
       <ul className="navigation__list">
         <li className="navigation__item">
-          <a href="/" className="navigation__link">
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              `navigation__link navigation__link_type_home ${isActive ? "navigation__link_active" : ""}`
+            }
+          >
             Home
-          </a>
+          </NavLink>
         </li>
         {isLoggedIn && (
           <li className="navigation__item">
-            <a href="/saved-news" className="navigation__link">
+            <NavLink
+              to="/saved-news"
+              className={({ isActive }) =>
+                `navigation__link navigation__link_type_saved ${isActive ? "navigation__link_active" : ""}`
+              }
+            >
               Saved articles
-            </a>
+            </NavLink>
           </li>
         )}
         <li className="navigation__item">
