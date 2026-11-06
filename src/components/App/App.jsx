@@ -17,6 +17,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
+import RegisterModal from "../RegisterModal/RegisterModal";
 
 import "./App.css";
 
@@ -28,15 +29,19 @@ function getStoredSearch() {
 }
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [search, setSearch] = useState(getStoredSearch);
+  const [activeModal, setActiveModal] = useState("");
   const location = useLocation();
   const headerTheme = location.pathname === "/" ? "dark" : "light";
   const navigate = useNavigate();
   const isLoginRequested = Boolean(location.state?.openLogin);
+  const currentModal = activeModal || (isLoginRequested ? "login" : "");
 
   const closeModal = () => {
-    navigate(location.pathname, { replace: true, state: null });
+    setActiveModal("");
+    if (isLoginRequested)
+      navigate(location.pathname, { replace: true, state: null });
   };
 
   const handleSearch = (keyword) => {
@@ -53,7 +58,11 @@ function App() {
 
   return (
     <div className="page">
-      <Header theme={headerTheme} isLoggedIn={isLoggedIn} />
+      <Header
+        theme={headerTheme}
+        isLoggedIn={isLoggedIn}
+        onSignInClick={() => setActiveModal("login")}
+      />
       <Routes>
         <Route
           path="/"
@@ -71,8 +80,17 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
-      {isLoginRequested && (
-        <LoginModal onClose={closeModal} onSwitch={() => {}} />
+      {currentModal === "login" && (
+        <LoginModal
+          onClose={closeModal}
+          onSwitch={() => setActiveModal("register")}
+        />
+      )}
+      {currentModal === "register" && (
+        <RegisterModal
+          onClose={closeModal}
+          onSwitch={() => setActiveModal("login")}
+        />
       )}
     </div>
   );

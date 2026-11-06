@@ -3,7 +3,13 @@ import "./Navigation.css";
 import logoutWhiteIcon from "../../images/logout-white.svg";
 import logoutDarkIcon from "../../images/logout-dark.svg";
 
-function Navigation({ theme, isLoggedIn, isMenuOpen, onLinkClick }) {
+function Navigation({
+  theme,
+  isLoggedIn,
+  isMenuOpen,
+  onLinkClick,
+  onSignInClick,
+}) {
   return (
     <nav
       className={`navigation navigation_theme_${theme} ${isMenuOpen ? "navigation_opened" : ""}`}
@@ -48,7 +54,11 @@ function Navigation({ theme, isLoggedIn, isMenuOpen, onLinkClick }) {
               />
             </button>
           ) : (
-            <button className="navigation__button" type="button">
+            <button
+              className="navigation__button"
+              type="button"
+              onClick={onSignInClick}
+            >
               Sign in
             </button>
           )}

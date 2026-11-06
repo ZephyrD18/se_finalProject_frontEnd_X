@@ -3,9 +3,13 @@ import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 import { useState } from "react";
 
-function Header({ theme, isLoggedIn }) {
+function Header({ theme, isLoggedIn, onSignInClick }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+  const handleSignInClick = () => {
+    closeMenu();
+    onSignInClick();
+  };
 
   return (
     <header
@@ -26,6 +30,7 @@ function Header({ theme, isLoggedIn }) {
           isLoggedIn={isLoggedIn}
           isMenuOpen={isMenuOpen}
           onLinkClick={closeMenu}
+          onSignInClick={handleSignInClick}
         />
       </div>
       {isMenuOpen && (
