@@ -13,10 +13,13 @@ function Main({ search, onSearch }) {
             Find the latest news on any topic and save them in your personal
             account.
           </p>
-          <SearchForm onSearch={onSearch} />
+          <SearchForm initialKeyword={search.keyword} onSearch={onSearch} />
         </div>
       </section>
-      <SearchResults search={search} />
+      <SearchResults
+        key={`${search.status}-${search.keyword}`}
+        search={search}
+      />
       <About />
     </main>
   );

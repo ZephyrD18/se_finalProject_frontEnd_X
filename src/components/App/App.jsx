@@ -5,24 +5,31 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+
+import { searchNews } from "../../utils/newsApi";
+import { sampleArticles, SEARCH_STORAGE_KEY } from "../../utils/constants";
+import { useState } from "react";
+import { readJson, writeJson } from "../../utils/storage";
+
 import LoginModal from "../LoginModal/LoginModal";
 import SavedNews from "../SavedNews/SavedNews";
-import { searchNews } from "../../utils/newsApi";
-import { sampleArticles } from "../../utils/constants";
-import { useState } from "react";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
+
 import "./App.css";
+
+const emptySearch = { status: "idle", keyword: "", articles: [] };
+
+function getStoredSearch() {
+  const search = readJson(SEARCH_STORAGE_KEY, null);
+  return search?.status === "success" ? search : emptySearch;
+}
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [search, setSearch] = useState({
-    status: "idle",
-    keyword: "",
-    articles: [],
-  });
+  const [search, setSearch] = useState(getStoredSearch);
   const location = useLocation();
   const headerTheme = location.pathname === "/" ? "dark" : "light";
   const navigate = useNavigate();
@@ -35,7 +42,12 @@ function App() {
   const handleSearch = (keyword) => {
     setSearch({ status: "loading", keyword, articles: [] });
     searchNews(keyword)
-      .then((articles) => setSearch({ status: "success", keyword, articles }))
+      .then((articles) => {
+        const result = { status: "success", keyword, articles };
+        setSearch(result);
+        writeJson(SEARCH_STORAGE_KEY, result);
+      })
+
       .catch(() => setSearch({ status: "error", keyword, articles: [] }));
   };
 
