@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import LoginModal from "../LoginModal/LoginModal";
 import SavedNews from "../SavedNews/SavedNews";
+import { searchNews } from "../../utils/newsApi";
 import { sampleArticles } from "../../utils/constants";
 import { useState } from "react";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -17,6 +18,11 @@ import "./App.css";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [search, setSearch] = useState({
+    status: "idle",
+    keyword: "",
+    articles: [],
+  });
   const location = useLocation();
   const headerTheme = location.pathname === "/" ? "dark" : "light";
   const navigate = useNavigate();
@@ -26,11 +32,22 @@ function App() {
     navigate(location.pathname, { replace: true, state: null });
   };
 
+  const handleSearch = (keyword) => {
+    setSearch({ status: "loading", keyword, articles: [] });
+    searchNews(keyword)
+      .then((articles) => setSearch({ status: "success", keyword, articles }))
+      .catch(() => setSearch({ status: "error", keyword, articles: [] }));
+  };
+
   return (
     <div className="page">
       <Header theme={headerTheme} isLoggedIn={isLoggedIn} />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route
+          path="/"
+          element={<Main search={search} onSearch={handleSearch} />}
+        />
+
         <Route
           path="/saved-news"
           element={

@@ -2,9 +2,8 @@ import "./Main.css";
 import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
 import SearchResults from "../SearchResults/SearchResults";
-import { sampleArticles } from "../../utils/constants";
 
-function Main() {
+function Main({ search, onSearch }) {
   return (
     <main className="main">
       <section className="main__hero">
@@ -14,10 +13,10 @@ function Main() {
             Find the latest news on any topic and save them in your personal
             account.
           </p>
-          <SearchForm />
+          <SearchForm onSearch={onSearch} />
         </div>
       </section>
-      <SearchResults articles={sampleArticles} />
+      <SearchResults search={search} />
       <About />
     </main>
   );

@@ -5,6 +5,14 @@ import lakeImage from "../images/cards/lake.jpg";
 import corgiImage from "../images/cards/corgi.jpg";
 
 export const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
+export const NEWS_API_BASE_URL = import.meta.env.PROD
+  ? "https://nomoreparties.co/news/v2/everything"
+  : "https://newsapi.org/v2/everything";
+
+export const SEARCH_ERROR_MESSAGE =
+  "Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later.";
+export const NEWS_PAGE_SIZE = 100;
+export const SEARCH_PERIOD_DAYS = 7;
 export const sampleArticles = [
   {
     _id: "default-1",
