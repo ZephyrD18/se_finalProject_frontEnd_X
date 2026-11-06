@@ -4,6 +4,7 @@ import yellowstoneImage from "../images/cards/yellowstone.jpg";
 import lakeImage from "../images/cards/lake.jpg";
 import corgiImage from "../images/cards/corgi.jpg";
 
+export const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 export const sampleArticles = [
   {
     _id: "default-1",
