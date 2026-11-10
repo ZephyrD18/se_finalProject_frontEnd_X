@@ -22,6 +22,10 @@
   color: var(--color-gray-text);
 }
 
+.search-form__input_type_error::placeholder {
+  color: var(--color-error);
+}
+
 .search-form__input:focus {
   box-shadow: 0 0 0 2px var(--color-accent-hover);
 }

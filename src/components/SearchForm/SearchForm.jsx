@@ -4,10 +4,15 @@ import "./SearchForm.css";
 function SearchForm({ initialKeyword, onSearch }) {
   const [keyword, setKeyword] = useState(initialKeyword);
 
+  const [hasError, setHasError] = useState(false);
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const query = keyword.trim();
-    if (!query) return;
+    if (!query) {
+      setKeyword("");
+      setHasError(true);
+      return;
+    }
     onSearch(query);
   };
 
@@ -19,13 +24,16 @@ function SearchForm({ initialKeyword, onSearch }) {
       noValidate
     >
       <input
-        className="search-form__input"
+        className={`search-form__input ${hasError ? "search-form__input_type_error" : ""}`}
         type="text"
         name="keyword"
-        placeholder="Enter topic"
+        placeholder={hasError ? "Please enter a keyword" : "Enter topic"}
         aria-label="Search topic"
         value={keyword}
-        onChange={(evt) => setKeyword(evt.target.value)}
+        onChange={(evt) => {
+          setKeyword(evt.target.value);
+          setHasError(false);
+        }}
         required
       />
       <button className="search-form__button" type="submit">
