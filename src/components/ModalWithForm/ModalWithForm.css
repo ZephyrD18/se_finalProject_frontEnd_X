@@ -73,6 +73,18 @@
   margin-top: 38px;
 }
 
+.modal-form__server-error {
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 0;
+  width: 100%;
+  font-family: var(--font-inter);
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: var(--color-error);
+}
+
 .modal-form__submit {
   display: block;
   width: 100%;

@@ -29,16 +29,21 @@ const fields = [
   },
 ];
 
-function RegisterModal({ onClose, onSwitch }) {
+const initialValues = { email: "", password: "", name: "" };
+
+function RegisterModal({ onClose, onSubmit, onSwitch, serverError }) {
   return (
     <ModalWithForm
       name="register"
       title="Sign up"
       fields={fields}
+      initialValues={initialValues}
       submitText="Sign up"
       switchText="Sign in"
       onSwitch={onSwitch}
       onClose={onClose}
+      onSubmit={onSubmit}
+      serverError={serverError}
     />
   );
 }

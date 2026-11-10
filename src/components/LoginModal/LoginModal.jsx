@@ -19,16 +19,21 @@ const fields = [
   },
 ];
 
-function LoginModal({ onClose, onSwitch }) {
+const initialValues = { email: "", password: "" };
+
+function LoginModal({ onClose, onSubmit, onSwitch, serverError }) {
   return (
     <ModalWithForm
       name="login"
       title="Sign in"
       fields={fields}
+      initialValues={initialValues}
       submitText="Sign in"
       switchText="Sign up"
       onSwitch={onSwitch}
       onClose={onClose}
+      onSubmit={onSubmit}
+      serverError={serverError}
     />
   );
 }
