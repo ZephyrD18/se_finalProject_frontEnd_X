@@ -1,4 +1,5 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { EMAIL_PATTERN } from "../../utils/constants";
 
 const fields = [
   {
@@ -7,6 +8,7 @@ const fields = [
     type: "email",
     placeholder: "Enter email",
     autoComplete: "email",
+    pattern: EMAIL_PATTERN,
   },
   {
     name: "password",

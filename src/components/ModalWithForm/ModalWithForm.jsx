@@ -23,6 +23,9 @@ function ModalWithForm({
                 type={field.type}
                 name={field.name}
                 placeholder={field.placeholder}
+                pattern={field.pattern}
+                minLength={field.minLength}
+                maxLength={field.maxLength}
                 autoComplete={field.autoComplete}
                 required
               />

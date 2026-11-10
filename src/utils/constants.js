@@ -5,6 +5,7 @@ import lakeImage from "../images/cards/lake.jpg";
 import corgiImage from "../images/cards/corgi.jpg";
 
 export const SEARCH_STORAGE_KEY = "lastSearch";
+export const EMAIL_PATTERN = "[^@\\s]+@[^@\\s]+\\.[^@\\s]{2,}";
 export const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 export const NEWS_API_BASE_URL = import.meta.env.PROD
   ? "https://nomoreparties.co/news/v2/everything"
