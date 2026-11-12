@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import logoutWhiteIcon from "../../images/logout-white.svg";
 import logoutDarkIcon from "../../images/logout-dark.svg";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Navigation({
   theme,
@@ -10,6 +12,7 @@ function Navigation({
   onLinkClick,
   onSignInClick,
 }) {
+  const currentUser = useContext(CurrentUserContext);
   return (
     <nav
       className={`navigation navigation_theme_${theme} ${isMenuOpen ? "navigation_opened" : ""}`}
@@ -46,7 +49,7 @@ function Navigation({
               className="navigation__button navigation__button_type_logout"
               type="button"
             >
-              Elise
+              {currentUser?.name}
               <img
                 className="navigation__logout-icon"
                 src={theme === "dark" ? logoutWhiteIcon : logoutDarkIcon}

@@ -18,6 +18,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import "./App.css";
 
@@ -29,7 +30,8 @@ function getStoredSearch() {
 }
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({ name: "Test" });
+  const isLoggedIn = Boolean(currentUser);
   const [search, setSearch] = useState(getStoredSearch);
   const [activeModal, setActiveModal] = useState("");
   const location = useLocation();
@@ -57,43 +59,45 @@ function App() {
   };
 
   return (
-    <div className="page">
-      <Header
-        theme={headerTheme}
-        isLoggedIn={isLoggedIn}
-        onSignInClick={() => setActiveModal("login")}
-      />
-      <Routes>
-        <Route
-          path="/"
-          element={<Main search={search} onSearch={handleSearch} />}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Header
+          theme={headerTheme}
+          isLoggedIn={isLoggedIn}
+          onSignInClick={() => setActiveModal("login")}
         />
+        <Routes>
+          <Route
+            path="/"
+            element={<Main search={search} onSearch={handleSearch} />}
+          />
 
-        <Route
-          path="/saved-news"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <SavedNews articles={sampleArticles} />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-      <Footer />
-      {currentModal === "login" && (
-        <LoginModal
-          onClose={closeModal}
-          onSubmit={(values) => console.log("Sign in with", values)}
-          onSwitch={() => setActiveModal("register")}
-        />
-      )}
-      {currentModal === "register" && (
-        <RegisterModal
-          onClose={closeModal}
-          onSwitch={() => setActiveModal("login")}
-        />
-      )}
-    </div>
+          <Route
+            path="/saved-news"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <SavedNews articles={sampleArticles} />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <Footer />
+        {currentModal === "login" && (
+          <LoginModal
+            onClose={closeModal}
+            onSubmit={(values) => console.log("Sign in with", values)}
+            onSwitch={() => setActiveModal("register")}
+          />
+        )}
+        {currentModal === "register" && (
+          <RegisterModal
+            onClose={closeModal}
+            onSwitch={() => setActiveModal("login")}
+          />
+        )}
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
