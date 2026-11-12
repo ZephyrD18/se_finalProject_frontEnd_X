@@ -85,7 +85,6 @@ function App() {
           onClose={closeModal}
           onSubmit={(values) => console.log("Sign in with", values)}
           onSwitch={() => setActiveModal("register")}
-          serverError="Test server error"
         />
       )}
       {currentModal === "register" && (
