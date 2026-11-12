@@ -16,6 +16,8 @@ export const SEARCH_ERROR_MESSAGE =
 export const NEWS_PAGE_SIZE = 100;
 export const SEARCH_PERIOD_DAYS = 7;
 export const CARDS_PER_ROW = 3;
+export const TOKEN_KEY = "jwt";
+export const USERS_KEY = "users";
 
 export const sampleArticles = [
   {
