@@ -7,9 +7,14 @@ import {
 } from "react-router-dom";
 
 import { searchNews } from "../../utils/newsApi";
-import { sampleArticles, SEARCH_STORAGE_KEY } from "../../utils/constants";
+import {
+  sampleArticles,
+  SEARCH_STORAGE_KEY,
+  TOKEN_KEY,
+} from "../../utils/constants";
 import { useState } from "react";
 import { readJson, writeJson } from "../../utils/storage";
+import { authorize, checkToken } from "../../utils/auth";
 
 import LoginModal from "../LoginModal/LoginModal";
 import SavedNews from "../SavedNews/SavedNews";
@@ -30,7 +35,7 @@ function getStoredSearch() {
 }
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({ name: "Test" });
+  const [currentUser, setCurrentUser] = useState(null);
   const isLoggedIn = Boolean(currentUser);
   const [search, setSearch] = useState(getStoredSearch);
   const [activeModal, setActiveModal] = useState("");
@@ -56,6 +61,19 @@ function App() {
       })
 
       .catch(() => setSearch({ status: "error", keyword, articles: [] }));
+  };
+
+  const handleLogin = (values) => {
+    authorize(values)
+      .then(({ token }) => {
+        localStorage.setItem(TOKEN_KEY, token);
+        return checkToken(token);
+      })
+      .then((user) => {
+        setCurrentUser(user);
+        closeModal();
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -86,7 +104,7 @@ function App() {
         {currentModal === "login" && (
           <LoginModal
             onClose={closeModal}
-            onSubmit={(values) => console.log("Sign in with", values)}
+            onSubmit={handleLogin}
             onSwitch={() => setActiveModal("register")}
           />
         )}
