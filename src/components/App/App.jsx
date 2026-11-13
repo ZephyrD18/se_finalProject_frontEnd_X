@@ -14,7 +14,7 @@ import {
 } from "../../utils/constants";
 import { useEffect, useState } from "react";
 import { readJson, writeJson } from "../../utils/storage";
-import { authorize, checkToken } from "../../utils/auth";
+import { authorize, checkToken, register } from "../../utils/auth";
 
 import LoginModal from "../LoginModal/LoginModal";
 import SavedNews from "../SavedNews/SavedNews";
@@ -24,6 +24,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import SuccessModal from "../SuccessModal/SuccessModal";
 
 import "./App.css";
 
@@ -94,6 +95,12 @@ function App() {
     navigate("/");
   };
 
+  const handleRegister = (values) => {
+    register(values)
+      .then(() => setActiveModal("success"))
+      .catch((err) => console.error(err));
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -134,6 +141,13 @@ function App() {
           <RegisterModal
             onClose={closeModal}
             onSwitch={() => setActiveModal("login")}
+            onSubmit={handleRegister}
+          />
+        )}
+        {currentModal === "success" && (
+          <SuccessModal
+            onClose={closeModal}
+            onSignInClick={() => setActiveModal("login")}
           />
         )}
       </div>
