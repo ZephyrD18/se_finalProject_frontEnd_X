@@ -6,7 +6,7 @@ import App from "./components/App/App.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter useTransitions={false}>
+    <BrowserRouter basename={import.meta.env.BASE_URL} useTransitions={false}>
       <App />
     </BrowserRouter>
   </StrictMode>,
