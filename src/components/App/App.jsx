@@ -40,9 +40,11 @@ function App() {
   const [isAuthChecked, setIsAuthChecked] = useState(
     () => !localStorage.getItem(TOKEN_KEY),
   );
-  const isLoggedIn = Boolean(currentUser);
+  const [modalError, setModalError] = useState("");
   const [search, setSearch] = useState(getStoredSearch);
   const [activeModal, setActiveModal] = useState("");
+
+  const isLoggedIn = Boolean(currentUser);
   const location = useLocation();
   const headerTheme = location.pathname === "/" ? "dark" : "light";
   const navigate = useNavigate();
@@ -58,7 +60,13 @@ function App() {
   }, []);
   const currentModal = activeModal || (isLoginRequested ? "login" : "");
 
+  const openModal = (name) => {
+    setModalError("");
+    setActiveModal(name);
+  };
+
   const closeModal = () => {
+    setModalError("");
     setActiveModal("");
     if (isLoginRequested)
       navigate(location.pathname, { replace: true, state: null });
@@ -86,7 +94,7 @@ function App() {
         setCurrentUser(user);
         closeModal();
       })
-      .catch((err) => console.error(err));
+      .catch((err) => setModalError(err.message));
   };
 
   const handleLogout = () => {
@@ -97,8 +105,8 @@ function App() {
 
   const handleRegister = (values) => {
     register(values)
-      .then(() => setActiveModal("success"))
-      .catch((err) => console.error(err));
+      .then(() => openModal("success"))
+      .catch((err) => setModalError(err.message));
   };
 
   return (
@@ -107,7 +115,7 @@ function App() {
         <Header
           theme={headerTheme}
           isLoggedIn={isLoggedIn}
-          onSignInClick={() => setActiveModal("login")}
+          onSignInClick={() => openModal("login")}
           onLogout={handleLogout}
         />
         <Routes>
@@ -134,20 +142,22 @@ function App() {
           <LoginModal
             onClose={closeModal}
             onSubmit={handleLogin}
-            onSwitch={() => setActiveModal("register")}
+            onSwitch={() => openModal("register")}
+            serverError={modalError}
           />
         )}
         {currentModal === "register" && (
           <RegisterModal
             onClose={closeModal}
-            onSwitch={() => setActiveModal("login")}
+            onSwitch={() => openModal("login")}
             onSubmit={handleRegister}
+            serverError={modalError}
           />
         )}
         {currentModal === "success" && (
           <SuccessModal
             onClose={closeModal}
-            onSignInClick={() => setActiveModal("login")}
+            onSignInClick={() => openModal("login")}
           />
         )}
       </div>
