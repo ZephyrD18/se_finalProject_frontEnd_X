@@ -8,7 +8,6 @@ function getErrorMessage(input) {
   return input.validationMessage;
 }
 
-// Keeps form values and browser validation messages in state
 export default function useFormWithValidation(initialValues) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});

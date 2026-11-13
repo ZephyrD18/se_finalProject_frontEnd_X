@@ -7,7 +7,6 @@ import handleImage from "../../images/not-found-handle.svg";
 function NothingFound({ title, text }) {
   return (
     <section className="nothing-found">
-      {/* The sad magnifying glass is built from the four layers of the mockup */}
       <div className="nothing-found__image" aria-hidden="true">
         <img className="nothing-found__circle" src={circleImage} alt="" />
         <img className="nothing-found__eyes" src={eyesImage} alt="" />

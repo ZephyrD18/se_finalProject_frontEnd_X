@@ -7,14 +7,11 @@ import {
 } from "react-router-dom";
 
 import { searchNews } from "../../utils/newsApi";
-import {
-  sampleArticles,
-  SEARCH_STORAGE_KEY,
-  TOKEN_KEY,
-} from "../../utils/constants";
+import { SEARCH_STORAGE_KEY, TOKEN_KEY } from "../../utils/constants";
 import { useEffect, useState } from "react";
 import { readJson, writeJson } from "../../utils/storage";
 import { authorize, checkToken, register } from "../../utils/auth";
+import { deleteArticle, getSavedArticles, saveArticle } from "../../utils/api";
 
 import LoginModal from "../LoginModal/LoginModal";
 import SavedNews from "../SavedNews/SavedNews";
@@ -40,6 +37,7 @@ function App() {
   const [isAuthChecked, setIsAuthChecked] = useState(
     () => !localStorage.getItem(TOKEN_KEY),
   );
+  const [savedArticles, setSavedArticles] = useState([]);
   const [modalError, setModalError] = useState("");
   const [search, setSearch] = useState(getStoredSearch);
   const [activeModal, setActiveModal] = useState("");
@@ -49,16 +47,19 @@ function App() {
   const headerTheme = location.pathname === "/" ? "dark" : "light";
   const navigate = useNavigate();
   const isLoginRequested = Boolean(location.state?.openLogin);
+  const currentModal = activeModal || (isLoginRequested ? "login" : "");
 
   useEffect(() => {
     const token = localStorage.getItem(TOKEN_KEY);
     if (!token) return;
-    checkToken(token)
-      .then((user) => setCurrentUser(user))
+    Promise.all([checkToken(token), getSavedArticles(token)])
+      .then(([user, articles]) => {
+        setCurrentUser(user);
+        setSavedArticles(articles);
+      })
       .catch(() => localStorage.removeItem(TOKEN_KEY))
       .finally(() => setIsAuthChecked(true));
   }, []);
-  const currentModal = activeModal || (isLoginRequested ? "login" : "");
 
   const openModal = (name) => {
     setModalError("");
@@ -80,7 +81,6 @@ function App() {
         setSearch(result);
         writeJson(SEARCH_STORAGE_KEY, result);
       })
-
       .catch(() => setSearch({ status: "error", keyword, articles: [] }));
   };
 
@@ -88,10 +88,11 @@ function App() {
     authorize(values)
       .then(({ token }) => {
         localStorage.setItem(TOKEN_KEY, token);
-        return checkToken(token);
+        return Promise.all([checkToken(token), getSavedArticles(token)]);
       })
-      .then((user) => {
+      .then(([user, articles]) => {
         setCurrentUser(user);
+        setSavedArticles(articles);
         closeModal();
       })
       .catch((err) => setModalError(err.message));
@@ -100,6 +101,7 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem(TOKEN_KEY);
     setCurrentUser(null);
+    setSavedArticles([]);
     navigate("/");
   };
 
@@ -107,6 +109,38 @@ function App() {
     register(values)
       .then(() => openModal("success"))
       .catch((err) => setModalError(err.message));
+  };
+
+  const findSavedArticle = (article) =>
+    savedArticles.find((item) => item.link === article.link);
+
+  const isArticleSaved = (article) => Boolean(findSavedArticle(article));
+
+  const handleDeleteArticle = (article) => {
+    deleteArticle(article._id, localStorage.getItem(TOKEN_KEY))
+      .then(() =>
+        setSavedArticles((articles) =>
+          articles.filter((item) => item._id !== article._id),
+        ),
+      )
+      .catch((err) => console.error(err));
+  };
+
+  const handleBookmarkClick = (article) => {
+    if (!isLoggedIn) {
+      openModal("register");
+      return;
+    }
+    const savedArticle = findSavedArticle(article);
+    if (savedArticle) {
+      handleDeleteArticle(savedArticle);
+      return;
+    }
+    saveArticle(article, localStorage.getItem(TOKEN_KEY))
+      .then((newArticle) =>
+        setSavedArticles((articles) => [newArticle, ...articles]),
+      )
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -121,9 +155,15 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Main search={search} onSearch={handleSearch} />}
+            element={
+              <Main
+                search={search}
+                onSearch={handleSearch}
+                onBookmarkClick={handleBookmarkClick}
+                isArticleSaved={isArticleSaved}
+              />
+            }
           />
-
           <Route
             path="/saved-news"
             element={
@@ -131,7 +171,10 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 isAuthChecked={isAuthChecked}
               >
-                <SavedNews articles={sampleArticles} />
+                <SavedNews
+                  articles={savedArticles}
+                  onDeleteArticle={handleDeleteArticle}
+                />
               </ProtectedRoute>
             }
           />

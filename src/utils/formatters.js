@@ -7,7 +7,6 @@ export function formatDate(isoDate) {
   });
 }
 
-// Returns the keywords ordered from most to least saved
 export function getKeywordsByPopularity(articles) {
   const counts = {};
   articles.forEach(({ keyword }) => {
@@ -16,7 +15,6 @@ export function getKeywordsByPopularity(articles) {
   return Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
 }
 
-// ["Nature", "Yellowstone", "Parks", "Photography"] -> "Nature, Yellowstone, and 2 other"
 export function formatKeywords(keywords) {
   if (keywords.length <= 2) return keywords.join(" and ");
   if (keywords.length === 3)

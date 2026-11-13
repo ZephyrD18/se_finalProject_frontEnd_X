@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import "./NewsCard.css";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { formatDate } from "../../utils/formatters";
 
-function NewsCard({ article, type }) {
+function NewsCard({ article, type, isSaved, onButtonClick }) {
+  const currentUser = useContext(CurrentUserContext);
   const isSavedPage = type === "saved";
+  const hasTooltip = isSavedPage || !currentUser;
 
   return (
     <article className="news-card">
@@ -33,13 +37,18 @@ function NewsCard({ article, type }) {
           isSavedPage
             ? "news-card__button_type_delete"
             : "news-card__button_type_bookmark"
-        }`}
+        } ${isSaved ? "news-card__button_saved" : ""}`}
         type="button"
-        aria-label={isSavedPage ? "Remove from saved" : "Save article"}
+        aria-label={
+          isSavedPage || isSaved ? "Remove from saved" : "Save article"
+        }
+        onClick={() => onButtonClick(article)}
       />
-      <span className="news-card__tooltip">
-        {isSavedPage ? "Remove from saved" : "Sign in to save articles"}
-      </span>
+      {hasTooltip && (
+        <span className="news-card__tooltip">
+          {isSavedPage ? "Remove from saved" : "Sign in to save articles"}
+        </span>
+      )}
     </article>
   );
 }

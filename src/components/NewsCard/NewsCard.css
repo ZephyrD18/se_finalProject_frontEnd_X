@@ -104,6 +104,11 @@
   background-image: url("../../images/bookmark-hover.svg");
 }
 
+.news-card__button_saved,
+.news-card__button_saved:hover {
+  background-image: url("../../images/bookmark-marked.svg");
+}
+
 .news-card__tooltip {
   position: absolute;
   top: 24px;

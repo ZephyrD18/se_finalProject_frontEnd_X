@@ -18,6 +18,7 @@ export const SEARCH_PERIOD_DAYS = 7;
 export const CARDS_PER_ROW = 3;
 export const TOKEN_KEY = "jwt";
 export const USERS_KEY = "users";
+export const SAVED_ARTICLES_KEY = "savedArticles";
 
 export const sampleArticles = [
   {

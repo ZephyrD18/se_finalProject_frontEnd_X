@@ -5,7 +5,6 @@ import {
   SEARCH_PERIOD_DAYS,
 } from "./constants";
 
-// 2026-11-05T14:30:00.000Z -> "2026-11-05"
 function toIsoDate(date) {
   return date.toISOString().slice(0, 10);
 }

@@ -5,7 +5,7 @@ import NothingFound from "../NothingFound/NothingFound";
 import { useState } from "react";
 import { CARDS_PER_ROW, SEARCH_ERROR_MESSAGE } from "../../utils/constants";
 
-function SearchResults({ search }) {
+function SearchResults({ search, onBookmarkClick, isArticleSaved }) {
   const [visibleCount, setVisibleCount] = useState(CARDS_PER_ROW);
 
   if (search.status === "loading") return <Preloader />;
@@ -37,6 +37,8 @@ function SearchResults({ search }) {
       <NewsCardList
         articles={search.articles.slice(0, visibleCount)}
         cardType="search"
+        onCardButtonClick={onBookmarkClick}
+        isArticleSaved={isArticleSaved}
       />
       {visibleCount < search.articles.length && (
         <button
