@@ -3,12 +3,16 @@ import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 import { useState } from "react";
 
-function Header({ theme, isLoggedIn, onSignInClick }) {
+function Header({ theme, isLoggedIn, onSignInClick, onLogout }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
   const handleSignInClick = () => {
     closeMenu();
     onSignInClick();
+  };
+  const handleLogoutClick = () => {
+    closeMenu();
+    onLogout();
   };
 
   return (
@@ -31,6 +35,7 @@ function Header({ theme, isLoggedIn, onSignInClick }) {
           isMenuOpen={isMenuOpen}
           onLinkClick={closeMenu}
           onSignInClick={handleSignInClick}
+          onLogout={handleLogoutClick}
         />
       </div>
       {isMenuOpen && (

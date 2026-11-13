@@ -12,7 +12,7 @@ import {
   SEARCH_STORAGE_KEY,
   TOKEN_KEY,
 } from "../../utils/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { readJson, writeJson } from "../../utils/storage";
 import { authorize, checkToken } from "../../utils/auth";
 
@@ -36,6 +36,9 @@ function getStoredSearch() {
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isAuthChecked, setIsAuthChecked] = useState(
+    () => !localStorage.getItem(TOKEN_KEY),
+  );
   const isLoggedIn = Boolean(currentUser);
   const [search, setSearch] = useState(getStoredSearch);
   const [activeModal, setActiveModal] = useState("");
@@ -43,6 +46,15 @@ function App() {
   const headerTheme = location.pathname === "/" ? "dark" : "light";
   const navigate = useNavigate();
   const isLoginRequested = Boolean(location.state?.openLogin);
+
+  useEffect(() => {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) return;
+    checkToken(token)
+      .then((user) => setCurrentUser(user))
+      .catch(() => localStorage.removeItem(TOKEN_KEY))
+      .finally(() => setIsAuthChecked(true));
+  }, []);
   const currentModal = activeModal || (isLoginRequested ? "login" : "");
 
   const closeModal = () => {
@@ -76,6 +88,12 @@ function App() {
       .catch((err) => console.error(err));
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem(TOKEN_KEY);
+    setCurrentUser(null);
+    navigate("/");
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -83,6 +101,7 @@ function App() {
           theme={headerTheme}
           isLoggedIn={isLoggedIn}
           onSignInClick={() => setActiveModal("login")}
+          onLogout={handleLogout}
         />
         <Routes>
           <Route
@@ -93,7 +112,10 @@ function App() {
           <Route
             path="/saved-news"
             element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <ProtectedRoute
+                isLoggedIn={isLoggedIn}
+                isAuthChecked={isAuthChecked}
+              >
                 <SavedNews articles={sampleArticles} />
               </ProtectedRoute>
             }

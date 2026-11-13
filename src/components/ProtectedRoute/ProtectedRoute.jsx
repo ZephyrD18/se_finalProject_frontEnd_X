@@ -1,6 +1,8 @@
 import { Navigate } from "react-router-dom";
 
-function ProtectedRoute({ isLoggedIn, children }) {
+function ProtectedRoute({ isLoggedIn, isAuthChecked, children }) {
+  if (!isAuthChecked) return null;
+
   if (!isLoggedIn) {
     return <Navigate to="/" replace state={{ openLogin: true }} />;
   }

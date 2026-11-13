@@ -11,6 +11,7 @@ function Navigation({
   isMenuOpen,
   onLinkClick,
   onSignInClick,
+  onLogout,
 }) {
   const currentUser = useContext(CurrentUserContext);
   return (
@@ -48,6 +49,7 @@ function Navigation({
             <button
               className="navigation__button navigation__button_type_logout"
               type="button"
+              onClick={onLogout}
             >
               {currentUser?.name}
               <img
