@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Ellipse">
+<mask id="stroke0_0_4" fill="white">
+<path d="M74 37C74 53.604 63.0629 67.6536 48 72.3374C44.525 73.4179 40.8305 74 37 74C16.5655 74 0 57.4345 0 37C0 16.5655 16.5655 0 37 0C57.4345 0 74 16.5655 74 37Z"/>
+</mask>
+<mask id="stroke1_0_4">
+<path d="M74 37C74 16.5655 57.4345 0 37 0C16.5655 0 0 16.5655 0 37C0 57.4345 16.5655 74 37 74C40.8305 74 44.525 73.4179 48 72.3374C63.0629 67.6536 74 53.604 74 37Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="white" mask="url(#stroke0_0_4)"/>
+</mask>
+<g clip-path="url(#paint0_angular_0_4_clip_path)" data-figma-skip-parse="true" mask="url(#stroke1_0_4)"><g transform="matrix(0 0.037 -0.037 0 37 37)"><foreignObject x="-1135.14" y="-1135.14" width="2270.27" height="2270.27"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(26, 27, 34, 1) 0deg,rgba(208, 210, 214, 0) 360deg);height:100%;width:100%;opacity:1"></div></foreignObject></g></g><path d="M74 37C74 16.5655 57.4345 0 37 0C16.5655 0 0 16.5655 0 37C0 57.4345 16.5655 74 37 74C40.8305 74 44.525 73.4179 48 72.3374C63.0629 67.6536 74 53.604 74 37Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="black" stroke-opacity="0" data-figma-gradient-stroke="{&#34;type&#34;:&#34;GRADIENT_ANGULAR&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.10196078568696976,&#34;g&#34;:0.10588235408067703,&#34;b&#34;:0.13333334028720856,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.81799125671386719,&#34;g&#34;:0.82532751560211182,&#34;b&#34;:0.83999997377395630,&#34;a&#34;:0.0},&#34;position&#34;:1.0}],&#34;transform&#34;:{&#34;m00&#34;:4.5311934339744599e-15,&#34;m01&#34;:-74.0,&#34;m02&#34;:74.0,&#34;m10&#34;:74.0,&#34;m11&#34;:4.5311934339744599e-15,&#34;m12&#34;:-4.5311934339744599e-15},&#34;opacity&#34;:1.0,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;stopsVar&#34;:[],&#34;visible&#34;:true}" mask="url(#stroke0_0_4)"/>
+</g>
+<defs>
+<clipPath id="paint0_angular_0_4_clip_path"><rect x="-5" y="-5" width="84" height="84"/></clipPath></defs>
+</svg>
